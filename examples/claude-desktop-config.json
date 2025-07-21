@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "swimlanes": {
+      "command": "node",
+      "args": ["/Users/joelong/GitHub/sl_mcp/dist/index.js"]
+    }
+  }
+}

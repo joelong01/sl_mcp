@@ -1,0 +1,31 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "axios",
+    "copilot",
+    "ehthumbs",
+    "eslintcache",
+    "extname",
+    "humanwhocodes",
+    "joelong",
+    "lifecycles",
+    "mcp",
+    "modelcontextprotocol",
+    "Nuxt",
+    "swimlanes",
+    "tsparser",
+    "zod"
+  ],
+  "ignorePaths": [
+    "**/*.ts",
+    "**/*.js",
+    "**/*.json",
+    "dist/**",
+    "node_modules/**",
+    ".git/**"
+  ],
+  "enableFiletypes": [
+    "markdown"
+  ]
+}
