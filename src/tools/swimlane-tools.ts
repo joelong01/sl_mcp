@@ -32,7 +32,14 @@ export async function createSwimlaneDiagram(input: unknown): Promise<{ content: 
     let imagePath: string | undefined;
     
     if (validated.includeImage) {
-      const imageResult = await downloadImage(swimlanesText, validated.title);
+      // Determine output path first to calculate proper image directory
+      const outputPath = validated.outputPath || generateMarkdownPath(validated.title, validated.folderStructure);
+      const outputDir = dirname(outputPath);
+      const imageDir = join(outputDir, 'images');
+      const imageFilename = generateImageFilename(validated.title);
+      const imageOutputPath = join(imageDir, imageFilename);
+      
+      const imageResult = await downloadImage(swimlanesText, validated.title, imageOutputPath);
       imagePath = imageResult.imagePath;
     }
 
@@ -270,7 +277,9 @@ function generateMarkdownContent(params: {
   content += `## Diagram Source\n\n\`\`\`swimlanes\n${swimlanesText}\n\`\`\`\n\n`;
   
   if (imagePath) {
-    const relativePath = imagePath.startsWith('./') ? imagePath : `./${imagePath.split('/').slice(-2).join('/')}`;
+    // Generate relative path from markdown file to image
+    const imageFilename = imagePath.split('/').pop() || 'diagram.png';
+    const relativePath = `./images/${imageFilename}`;
     content += `## Diagram\n\n![${title}](${relativePath})\n\n`;
   }
   
@@ -303,4 +312,12 @@ function generateImagePath(title?: string): string {
   const filename = `${sanitizedTitle}.png`;
   
   return join('docs', 'diagrams', 'images', filename);
+}
+
+/**
+ * Generate a suitable image filename
+ */
+function generateImageFilename(title?: string): string {
+  const sanitizedTitle = (title || 'diagram').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return `${sanitizedTitle}.png`;
 }
