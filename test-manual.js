@@ -28,7 +28,7 @@ note over Alice: Store token securely`;
     const axios = (await import('axios')).default;
     
     try {
-      const response = await axios.get('https://swimlanes.io/');
+      await axios.get('https://swimlanes.io/');
       console.log('✅ Swimlanes.io is accessible');
     } catch (error) {
       console.log('⚠️  Swimlanes.io accessibility test failed:', error.message);

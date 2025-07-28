@@ -6,7 +6,7 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { z } from 'zod';
+
 import { createSwimlaneDiagram, generateSwimlaneImage, getSwimlaneImageLink } from './tools/swimlane-tools.js';
 
 /**
